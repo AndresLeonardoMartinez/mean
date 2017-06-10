@@ -1,0 +1,39 @@
+
+<div class="row" ng-hide="data._id">
+  <div class="col-md-6">
+      <h2>Crear una nueva librería</h2>
+  </div>
+</div>
+<div class="container">
+  <div id="map_canvas" ng-controller="mainCtrl">
+      <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+        <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+    </ui-gmap-google-map>
+ </div>
+  <div>
+    <p>
+      <label>Nombre </label> 
+      <input id="nombre" class="form-control" type="text" ng-model="data.nombre" required>
+    </p>
+     <p>
+      <label>latitud</label> 
+      <input id="latitude" class="form-control" type="number" ng-model="data.latitude"  required>
+    </p>
+     <p>
+      <label>longitud</label> 
+      <input id="longitud" class="form-control" type="number" ng-model="data.longitude" required>
+    </p>
+    <p>
+      <label>palabras claves</label> 
+      <input id="palabrasClaves" class="form-control" type="text" ng-model="data.palabrasClaves" required>
+    </p>
+    <p>
+      <label>descripcion</label> 
+      <textarea id="descripcion" rows="3" type="text" class="form-control" ng-model="data.descripcion" ></textarea>
+    </p>
+    <p>
+      <button style="margin-top:20px" class="btn btn-default" ng-click="saveLugar(data)">Save</button>
+      <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Back</button>
+    </p>
+  </div>
+</div>

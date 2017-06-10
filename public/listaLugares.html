@@ -1,0 +1,15 @@
+
+<div class="row" ng-hide="data._id">
+  <div class="col-md-6">
+      <h2>Crear una nueva librería</h2>
+  </div>
+</div>
+<div class="container">
+  <div id="map_canvas" ng-controller="mostrarLugares">
+      <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+        <ui-gmap-marker ng-repeat="lugar in lugares" coords="lugar.coords" idkey="lugar._id"></ui-gmap-marker>
+    </ui-gmap-google-map>
+  </div>
+      <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Back</button>
+    
+</div>

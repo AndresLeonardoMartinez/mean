@@ -1,0 +1,58 @@
+<div class = "row">
+  <div class="col-md-6">
+    <h2>
+      Lugares
+    </h2>
+  </div>
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-2">
+    <a style="margin-top:20px" class="btn btn-default" href="#/new/lugar">Nuevo</a>
+  </div>
+  <div class="col-md-1">
+  </div>
+</div>
+<div class="container">
+  <table class="table table-hover">
+    <tbody>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          
+           <th> nombre</th>
+           
+             
+           <th> latitud</th>
+           
+             
+         <th>   longitud</th>
+            
+           
+         <th>   descripcion</th>
+          
+           
+         <th>   palabras claves</th>
+            </tr>
+           <thead>
+      <tr ng-repeat="lugar in lugares | orderBy:'nombre'" style="cursor:pointer" ng-click="showContact(contact._id)">
+        <td>
+          {{ lugar.nombre }} 
+        </td>
+        <td>
+          {{ lugar.latitude }} 
+        </td>
+        <td>
+          {{ lugar.longitude }}
+        </td>
+        <td>
+          {{ lugar.descripcion }}
+        </td>
+        <td>
+          {{ lugar.palabrasClaves }}
+        </td>
+      </tr>
+      </table>
+
+    </tbody>
+  </table>
+</div>
