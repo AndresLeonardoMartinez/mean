@@ -1,7 +1,8 @@
   body {
         min-height: 2000px;
-        padding-top: 70px;
+        /*padding-top: 70px;*/
       }
 .angular-google-map-container {
-     height: 400px; 
+     height: 600px; 
+     
      }

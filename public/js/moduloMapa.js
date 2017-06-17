@@ -24,7 +24,9 @@ var app= angular.module('moduloMapa', ['uiGmapgoogle-maps'])
                 };
                 //$scope.map.markers.push(marker);
                 $scope.map.markers[0]=marker;
-                
+                $('html, body').animate({
+                scrollTop: $('#formulario').offset().top
+                }, 'slow');    
                 latitudService.update(marker.coords.latitude,marker.coords.longitude);
                 
                 //console.log($scope.map.markers);
@@ -34,16 +36,69 @@ var app= angular.module('moduloMapa', ['uiGmapgoogle-maps'])
         }
     });
 })
-.controller('mostrarLugares', function ($scope) {
+.controller('mostrarLugares', function ($scope , $http) {
+ $scope.map = { 
+      center: {
+                latitude: -38.7167,
+                longitude:-62.2833
+            },
+      zoom: 13
+   };
+$scope.markers = [];
+   
+  $http.get("/lugares")
+   .then(function(response) {
+     var markers = response.data;
+     _.forEach(markers, function(marker) {
+       marker.coords = {
+         latitude: marker.latitude,
+         longitude: marker.longitude
+       }
+    //    marker.events = {
+    //        click: function(mapModel, eventName, originalEventArgs) {
+    //            console.log("user defined event: " + eventName, mapModel, originalEventArgs);
+               
+    //        }
+    //    }
+     })
+    $scope.markers = markers;
+   })
+})
 
-angular.extend($scope, {
+.controller('editCtrl', function ($scope ,latitudServiceParaEditar,$http) {
+    // console.log($scope);
+    $scope.markers = [];
+    var a=0;
+    var coords= $scope.data=latitudServiceParaEditar.data;
+     $scope.$watch(function(scope){ 
+        
+         if (scope.data.latitude !== "" && a===0){
+        // console.log(scope.data.latitude);
+            //var coords= latitudServiceParaEditar.data;
+            //$scope.markers = [];
+            var marker ={};
+            marker.id=Date.now();
+            marker.coords = {
+                latitude: coords.latitude,
+                longitude: coords.longitude
+            }
+            a++;
+            $scope.markers[0]=marker;
+            // console.log($scope.markers);
+        }
+     }
+     );
+        
+       
+    angular.extend($scope, {
         map: {
             center: {
                 latitude: -38.7167,
                 longitude:-62.2833
             },
             zoom: 13,
-            markers: [],
+            
+            markers: $scope.markers,
             events: {
             click: function (map, eventName, originalEventArgs) {
                 var e = originalEventArgs[0];
@@ -56,9 +111,11 @@ angular.extend($scope, {
                     }
                 };
                 //$scope.map.markers.push(marker);
-                $scope.map.markers[0]=marker;
-                
-                latitudService.update(marker.coords.latitude,marker.coords.longitude);
+                $scope.markers[0]=marker;
+                $('html, body').animate({
+                scrollTop: $('#formulario').offset().top
+                }, 'slow');    
+                latitudServiceParaEditar.update(marker.coords.latitude,marker.coords.longitude);
                 
                 //console.log($scope.map.markers);
                 $scope.$apply();
@@ -66,8 +123,14 @@ angular.extend($scope, {
         }
         }
     });
+
 }
 );
+
+
+
+
+
 
 
 

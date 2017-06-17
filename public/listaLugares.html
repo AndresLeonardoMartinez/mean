@@ -5,11 +5,21 @@
   </div>
 </div>
 <div class="container">
-  <div id="map_canvas" ng-controller="mostrarLugares">
-      <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
-        <ui-gmap-marker ng-repeat="lugar in lugares" coords="lugar.coords" idkey="lugar._id"></ui-gmap-marker>
-    </ui-gmap-google-map>
-  </div>
-      <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Back</button>
+  <div ng-controller="mostrarLugares">
+    <ui-gmap-google-map 
+        center='map.center' 
+        zoom='map.zoom'
+       options="map.options">
     
-</div>
+      <ui-gmap-markers models="markers"
+          coords="'coords'" 
+          click="'onClick'"
+          options="'options'" 
+          events="'events'" 
+          idkey="'_id'">
+        <ui-gmap-windows>
+           <div ng-non-bindable>{{nombre}}<br>{{descripcion}}</div>
+        </ui-gmap-windows>        
+      </ui-gmap-markers>
+     </ui-gmap-google-map>      
+    </div>

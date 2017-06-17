@@ -34,15 +34,15 @@
          <th>   palabras claves</th>
             </tr>
            <thead>
-      <tr ng-repeat="lugar in lugares | orderBy:'nombre'" style="cursor:pointer" ng-click="showContact(contact._id)">
+      <tr ng-repeat="lugar in lugares | orderBy:'nombre'" style="cursor:pointer" ng-click="showLugar(lugar._id)">
         <td>
           {{ lugar.nombre }} 
         </td>
         <td>
-          {{ lugar.latitude }} 
+          {{ lugar.latitude | number:4 }} 
         </td>
         <td>
-          {{ lugar.longitude }}
+          {{ lugar.longitude | number:4}}
         </td>
         <td>
           {{ lugar.descripcion }}
