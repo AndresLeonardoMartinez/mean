@@ -10,30 +10,30 @@
         <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
     </ui-gmap-google-map>
  </div>
-  <div>
+  <div id="formulario">
     <p>
       <label>Nombre </label> 
       <input id="nombre" class="form-control" type="text" ng-model="data.nombre" required>
     </p>
      <p>
-      <label>latitud</label> 
+      <label>Latitud</label> 
       <input id="latitude" class="form-control" type="number" ng-model="data.latitude"  required>
     </p>
      <p>
-      <label>longitud</label> 
+      <label>Longitud</label> 
       <input id="longitud" class="form-control" type="number" ng-model="data.longitude" required>
     </p>
     <p>
-      <label>palabras claves</label> 
+      <label>Palabras claves</label> 
       <input id="palabrasClaves" class="form-control" type="text" ng-model="data.palabrasClaves" required>
     </p>
     <p>
-      <label>descripcion</label> 
+      <label>Descripcion</label> 
       <textarea id="descripcion" rows="3" type="text" class="form-control" ng-model="data.descripcion" ></textarea>
     </p>
     <p>
-      <button style="margin-top:20px" class="btn btn-default" ng-click="saveLugar(data)">Save</button>
-      <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Back</button>
+      <button style="margin-top:20px" class="btn btn-default" ng-click="saveLugar(data)">Guardar</button>
+      <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Volver</button>
     </p>
   </div>
 </div>

@@ -1,0 +1,19 @@
+<div class="col-md-4" > 
+  <h1>Login</h1>
+  <div  ng-if="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+  <form class="form" ng-submit="autenticar(data)">
+    <div class="form-group">
+      <label>Username</label>
+      <input type="text" class="form-control" id="name" name="name" ng-model="data.name" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+        <input type="password" class="form-control" id="password" name="password" ng-model="data.password" required>
+      </div>
+      <div>
+        <input type="submit" id="submit" value="Submit">
+        <!--<button style="margin-top:20px" class="btn btn-default" ng-click="autenticar(data)">Save</button>-->
+
+      </div>
+  </form>
+</div>

@@ -5,3 +5,8 @@
 .angular-google-map-container {
      height: 400px; 
      }
+
+ 
+.flash-message {
+    margin-top: 20px;
+}
