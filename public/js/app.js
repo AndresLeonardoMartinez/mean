@@ -105,8 +105,11 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
         $scope.lugares = lugares.data;
         
         $scope.showLugar = function(lugar_id) {
+            
             var lugarUrl = "/edit/" + lugar_id;
             $location.path(lugarUrl);
+            
+            
         }
     })
     .controller("NewLugarController", function($scope, $location, Lugares,latitudService) {
