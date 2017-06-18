@@ -113,15 +113,23 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
         }
     })
     .controller("NewLugarController", function($scope, $location, Lugares,latitudService) {
-         $scope.data = latitudService.data;
+        
+          
+        //  console.log($scope);
         $scope.back = function() {
             $location.path("/");
         };
 
         $scope.saveLugar = function(lugar) {
+            var coords =latitudService.data;
+            console.log(coords);
+            lugar.latitude=coords.latitude;
+            lugar.longitude=coords.longitude;
             Lugares.createLugar(lugar).then(function(doc) {
                 var lugarUrl = "/lugar/" + doc.data._id;
+                $scope.contactFormUrl = "";
                 $location.path("/");
+                // $scope.data='';
             }, function(response) {
                 alert(response);
             });

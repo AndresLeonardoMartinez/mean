@@ -1,6 +1,8 @@
 var app= angular.module('moduloMapa', ['uiGmapgoogle-maps'])
  .controller('mainCtrl', function ($scope, latitudService) {
     $scope.data = latitudService.data;
+    latitudService.update('','');
+
 
     
     angular.extend($scope, {
