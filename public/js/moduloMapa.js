@@ -68,13 +68,14 @@ $scope.markers = [];
 })
 
 .controller('editCtrl', function ($scope ,latitudServiceParaEditar,$http) {
-    // console.log($scope);
+    // // console.log($scope);
     $scope.markers = [];
-    var a=0;
-    var coords= $scope.data=latitudServiceParaEditar.data;
-     $scope.$watch(function(scope){ 
-        
-         if (scope.data.latitude !== "" && a===0){
+     var a=0;
+     var coords= $scope.data=latitudServiceParaEditar.data;
+     console.log(coords);
+    var unregister =  $scope.$watch(function(scope){ 
+        console.log("estoy viendo todo");
+         if (scope.data.latitude !== 0 && a===0){
         // console.log(scope.data.latitude);
             //var coords= latitudServiceParaEditar.data;
             //$scope.markers = [];
@@ -86,10 +87,12 @@ $scope.markers = [];
             }
             a++;
             $scope.markers[0]=marker;
-            // console.log($scope.markers);
+            unregister();    
         }
-     }
-     );
+
+      }
+      );
+
         
        
     angular.extend($scope, {
