@@ -142,7 +142,6 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
                 }
                 else
             {
-                 console.log(data);
                  $scope.errorMessage  =data.res;
             }
             });
