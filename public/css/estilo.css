@@ -12,3 +12,21 @@
 
      /*height: 600px; */
 }
+
+
+
+mark{
+  background-color: lightblue;
+  height: 500px;
+  width: 1000px;
+}
+
+section{
+  margin-left: 10px;
+  padding-left: 20px;
+ 
+  padding-bottom: 10px;
+  padding-right: 10px;
+  
+ 
+}

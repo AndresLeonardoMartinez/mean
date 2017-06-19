@@ -49,7 +49,7 @@ apiRoutes.use(function(req, res, next) {
     console.log(req.method, req.url);
     var metodo = req.method;
     var reqUrl=req.url;
-    if (metodo ==="POST" || metodo==="DELETE" || metodo==="PUT" ){
+    if (metodo ==="POST" || metodo==="DELETE" ){
         // check header or url parameters or post parameters for token
 	var token = req.body.token || req.params.token || req.headers['x-access-token'];
 

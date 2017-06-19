@@ -1,7 +1,7 @@
-
+<link rel="shortcut icon" href="">
 <div class="row" ng-hide="lugar._id">
   <div class="col-md-6">
-      <h2>Editar una librería existente</h2>
+      <h2>Editar una Plaza o Espacio Verde existente.</h2>
   </div>
 </div>
 <div class="container">
@@ -19,23 +19,23 @@
         {{lugar.nombre}}
     </p>
      <p>
-      <label>latitud</label> 
+      <label>Latitud</label> 
       <input id="latitude" class="form-control" type="number" ng-model="data.latitude"  required>
     </p>
     
-      <label>longitud</label> 
+      <label>Longitud</label> 
       <input id="longitud" class="form-control" type="number" ng-model="data.longitude" required>
     </p>
     <p>
-      <label>palabras claves</label> 
+      <label>Palabras Claves</label> 
       <input id="palabrasClaves" class="form-control" type="text" ng-model="lugar.palabrasClaves" required>
     </p>
     <p>
-      <label>descripcion</label> 
+      <label>Descripción</label> 
       <textarea id="descripcion" rows="3" type="text" class="form-control" ng-model="lugar.descripcion" ></textarea>
     </p>
     <p>
-    <a href="#/"><button style="margin-top:20px" class="btn btn-default" ng-click="deleteLugar(lugar._id)">Elminar</button></a>
+    <a href="#/"><button style="margin-top:20px" class="btn btn-default" ng-click="deleteLugar(lugar._id)">Eliminar</button></a>
       <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Volver</button>
       <button style="margin-top:20px" class="btn btn-default" ng-click="saveLugar(lugar)">Guardar</button>
     </p>

@@ -35,8 +35,12 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
                 templateUrl: 'login.html',
                 controller: 'loginController'
             })
-                .when('/logout', {
+            .when('/logout', {
                 controller: 'logoutController'
+            })
+            .when('/ver/:lugarId', {
+                templateUrl:"verLugar.html",
+                controller:"EditLugarController"
             })
             
             // .otherwise({
@@ -99,17 +103,34 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
                     alert("Error deleting this lugar.");
                     console.log(response);
                 });
-        }
+        };
+         this.editLugarComentario = function(lugar) {
+            var url = "/lugares/" + lugar._id;
+            console.log(lugar._id);
+            return $http.put(url, lugar).
+                then(function(response) {
+                    return response;
+                }, function(response) {
+                    alert("Error cargando el comentario.");
+                    console.log(response);
+                });
+        };
+
     })
-    .controller("ListController", function(lugares, $scope, $location) {
+    .controller("ListController", function(lugares, $scope, $location,servicioAutenticar) {
         $scope.lugares = lugares.data;
         
         $scope.showLugar = function(lugar_id) {
+            if(servicioAutenticar.isLoggedIn()){
+                var lugarUrl = "/edit/" + lugar_id;
+                 $location.path(lugarUrl);
+            }else{
+                var lugarUrl="/ver/"+lugar_id;
+                 $location.path(lugarUrl);
+            }
+
             
-            var lugarUrl = "/edit/" + lugar_id;
-            $location.path(lugarUrl);
-            
-            
+           
         }
     })
     .controller("NewLugarController", function($scope, $location, Lugares,latitudService) {
@@ -216,6 +237,8 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
                          $location.path('/');
                         // $location.path('/');
                         // $location.replace();
+
+                      
                     } else {
                         $scope.errorMessage  = 'Username or password is incorrect';
 
@@ -292,13 +315,33 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
     
 
  .controller('mainController', function($scope) {
-$scope.sortType     = 'nombre'; // set the default sort type
-$scope.sortReverse  = false;  // set the default sort order
-$scope.buscaLugar   = '';     // set the default search/filter term
-
- 
-
+    $scope.sortType     = 'nombre'; // set the default sort type
+    $scope.sortReverse  = false;  // set the default sort order
+    $scope.buscaLugar   = '';     // set the default search/filter term
 })
+.controller("ReviewController", function(Lugares,$scope){
+     this.comentario = {};
+   
+    $scope.addReview = function(lugar){
+        lugar.comentarios.push(this.comentario);
+         console.log("agrego comentario");
+        Lugares.editLugarComentario(lugar).then(
+            function(){
+                var lugarUrl = "/lugar/" + doc.data._id;
+                $location.path(lugarUrl);
+            },
+            function(response){
+                alert(response)
+            }
+        );
+        // lugar.reviews.push(this.review);
+        this.review = {};
+    };
+
+    
+    
+})
+
     
 
 
