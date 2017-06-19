@@ -28,7 +28,12 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
             })
             .when("/edit/:lugarId", {
                 controller: "EditLugarController",
-                templateUrl: "lugar-form-edit.html"
+                templateUrl: "lugar-form-edit.html",
+                // resolve: {
+                //     lugar: function(Lugares) {
+                //         return Lugares.getLugar(lugarId);
+                //     }
+                // }
             })
             //ruteo
             .when('/login', {
@@ -67,9 +72,11 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
             var token=$window.localStorage['mean-token'];;
             return $http.post("/lugares", lugar,{ headers: {'x-access-token': token} }).
                 then(function(response) {
+                    //exito
                     return response;
                 }, function(response) {
-                    alert("Error creating lugar.");
+                    //error
+                    return response;
                 });
         };
         this.getLugar = function(lugarId) {
@@ -134,17 +141,30 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
         }
     })
     .controller("NewLugarController", function($scope, $location, Lugares,latitudService) {
-         $scope.data = latitudService.data;
+        $scope.data =latitudService.data;
+          
+        //  console.log($scope);
         $scope.back = function() {
             $location.path("/");
         };
 
         $scope.saveLugar = function(lugar) {
+            var coords =latitudService.data;
+            console.log(coords);
+            lugar.latitude=coords.latitude;
+            lugar.longitude=coords.longitude;
+            lugar.comentarios=[];
             Lugares.createLugar(lugar).then(function(doc) {
-                var lugarUrl = "/lugar/" + doc.data._id;
-                $location.path("/");
-            }, function(response) {
-                alert(response);
+                var data=doc.data;
+                if (data.hasOwnProperty("latitude")){
+                    var lugarUrl = "/lugar/" + doc.data._id;
+                    $scope.contactFormUrl = "";
+                    $location.path("/");
+                }
+                else
+            {
+                 $scope.errorMessage  =data.res;
+            }
             });
         }
     })
@@ -165,61 +185,67 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
     .factory('latitudServiceParaEditar', function(){
         return {
             data: {
-            latitude: '',
-            longitude:''
+            latitude: 0,
+            longitude:0
         }, 
         update: function(lati,longi) {
         // Improve this method as needed
         this.data.latitude = lati;
-        this.data.longitude = longi;
+        this.data.longitude = longi
         }
             // Other methods or objects can go here
         };
-        })
+    })
+    
     .controller("EditLugarController", function($scope, $location,$routeParams,Lugares,$http,latitudServiceParaEditar) {
         //obtengo el valor de la base de datos y lo actualizo
         // console.log(data);
         // console.log($scope);
-        var latBD,longBD;
-        var id = $routeParams.lugarId;
-        var patch=("/lugares/"+id);
-       console.log(patch);
-        $http.get(patch)
-            .then(function mySuccess(response) {
-            var latBD=response.data.latitude;
-            var longBD=response.data.longitude;
-            latitudServiceParaEditar.update(latBD,longBD);
-         //   console.log("deberia updatear con los valores"+latBD);
-            //$scope.$apply();
-             console.log("coordenadas"+latBD);
-        }, function myError(response) {
-            console.log('error');
-        });
+    //     var latBD,longBD;
+    //     var id = $routeParams.lugarId;
+    //     var patch=("/lugares/"+id);
+    //    console.log(patch);
+    //     $http.get(patch)
+    //         .then(function mySuccess(response) {
+    //         $scope.lugar=
+    //         var latBD=response.data.latitude;
+    //         var longBD=response.data.longitude;
+    //         latitudServiceParaEditar.update(latBD,longBD);
+    //      //   console.log("deberia updatear con los valores"+latBD);
+    //         //$scope.$apply();
+    //          console.log("coordenadas"+latBD);
+    //     }, function myError(response) {
+    //         console.log('error');
+    //     });
         
-        var data= $scope.data = latitudServiceParaEditar.data;
+        // var data= $scope.data = latitudServiceParaEditar.data;
+        
 
         Lugares.getLugar($routeParams.lugarId).then(function(doc) {
-            $scope.lugar = doc.data;
+            
+            var lugar= $scope.lugar = doc.data;
+            console.log(lugar);
+            latitudServiceParaEditar.update(lugar.latitude,lugar.longitude); 
+            
+
         }, function(response) {
             alert(response);
         });
-        // console.log($routeParams.lugarId);
-        // $scope.toggleEdit = function() {
-        //     $scope.editMode = true;
-        //     $scope.contactFormUrl = "contact-form.html";
-        // };
+        
 
         $scope.back = function() {
+            latitudServiceParaEditar.update(0,0); 
             $location.path("/");
         };
 
         $scope.saveLugar = function(lugar) {
-            var coords =$scope.data;
+            var coords =latitudServiceParaEditar.data;
             lugar.latitude=coords.latitude;
             lugar.longitude=coords.longitude;
             Lugares.editLugar(lugar);
             // $scope.editMode = false;
             $scope.contactFormUrl = "";
+            latitudServiceParaEditar.update(0,0); 
             $location.path("/");
         };
 

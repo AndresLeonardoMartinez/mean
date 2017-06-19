@@ -1,5 +1,5 @@
 
-<div class="row" ng-hide="data._id">
+<div class="row" ng-hide="lugar._id">
   <div class="col-md-6">
       <h2>Crear una nueva librería</h2>
   </div>
@@ -11,29 +11,42 @@
     </ui-gmap-google-map>
  </div>
   <div id="formulario">
+    <form name="crearLugar">
     <p>
       <label>Nombre </label> 
-      <input id="nombre" class="form-control" type="text" ng-model="data.nombre" required>
+      <input id="nombre" class="form-control" type="text" ng-model="lugar.nombre" required>
     </p>
+   
      <p>
       <label>Latitud</label> 
-      <input id="latitude" class="form-control" type="number" ng-model="data.latitude"  required>
+      <input id="latitude" class="form-control"  ng-model="data.latitude"  required>
+    <!--{{data.latitude}}-->
     </p>
      <p>
       <label>Longitud</label> 
-      <input id="longitud" class="form-control" type="number" ng-model="data.longitude" required>
+      <input id="longitud" class="form-control"  ng-model="data.longitude" required>
+      <!--{{data.longitude}}-->
     </p>
+     
+   
     <p>
       <label>Palabras claves</label> 
-      <input id="palabrasClaves" class="form-control" type="text" ng-model="data.palabrasClaves" required>
+      <input id="palabrasClaves" class="form-control" type="text" ng-model="lugar.palabrasClaves" required>
     </p>
     <p>
       <label>Descripcion</label> 
-      <textarea id="descripcion" rows="3" type="text" class="form-control" ng-model="data.descripcion" ></textarea>
+      <textarea id="descripcion" rows="3" type="text" class="form-control" ng-model="lugar.descripcion" ></textarea>
     </p>
     <p>
-      <button style="margin-top:20px" class="btn btn-default" ng-click="saveLugar(data)">Guardar</button>
-      <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Volver</button>
+      <div  ng-if="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
+      <input type="submit" value="Guardar" class="btn btn-default" ng-click="crearLugar.$valid && saveLugar(lugar)" />
+      <!--<div>
+      {{crearLugar.$valid}}
+      </div>-->
+      <!--<button style="margin-top:20px" class="btn btn-default" ng-click="saveLugar(lugar)">Guardar</button>-->
+      <button class="btn btn-default" ng-click="back()">Volver</button>
     </p>
+        </form>
+
   </div>
 </div>

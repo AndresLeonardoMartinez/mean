@@ -7,7 +7,8 @@ var mongoose = require('mongoose');
 var expressSession = require('express-session');
 var ObjectID = mongodb.ObjectID;
 var USER_COLLECTION = "users";
-
+var bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 var config = require('./config'); // get our config file
@@ -45,16 +46,20 @@ function handleError(res, reason, message, code) {
 // app.get('/setup', function(req, res) {
 
 // 	// create a sample user
-// 	var nick = new User({ 
-// 		name: 'admin', 
-// 		password: 'admin',
-// 		admin: true 
-// 	});
-// 	nick.save(function(err) {
-// 		if (err) throw err;
+// 	var password = 'admin'
+// 	bcrypt.hash(password, saltRounds, function(err, hash) {
+//   		// Store hash in your password DB.
+// 		var admin = new User({ 
+// 			name: 'admin', 
+// 			password: hash,
+// 			admin: true 
+// 		});
+// 		admin.save(function(err) {
+// 			if (err) throw err;
 
-// 		console.log('User saved successfully');
-// 		res.json({ success: true });
+// 			console.log('User saved successfully');
+// 			res.json({ success: true });
+// 		});
 // 	});
 // });
  
