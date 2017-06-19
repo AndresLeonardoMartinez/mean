@@ -68,9 +68,11 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
             var token=$window.localStorage['mean-token'];;
             return $http.post("/lugares", lugar,{ headers: {'x-access-token': token} }).
                 then(function(response) {
+                    //exito
                     return response;
                 }, function(response) {
-                    alert("Error creating lugar.");
+                    //error
+                    return response;
                 });
         };
         this.getLugar = function(lugarId) {
@@ -118,7 +120,7 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
         }
     })
     .controller("NewLugarController", function($scope, $location, Lugares,latitudService) {
-        
+        $scope.data =latitudService.data;
           
         //  console.log($scope);
         $scope.back = function() {
@@ -130,13 +132,19 @@ var lugares= angular.module("lugaresApp", ['ngRoute','moduloMapa'])
             console.log(coords);
             lugar.latitude=coords.latitude;
             lugar.longitude=coords.longitude;
+            lugar.comentarios=[];
             Lugares.createLugar(lugar).then(function(doc) {
-                var lugarUrl = "/lugar/" + doc.data._id;
-                $scope.contactFormUrl = "";
-                $location.path("/");
-                // $scope.data='';
-            }, function(response) {
-                alert(response);
+                var data=doc.data;
+                if (data.hasOwnProperty("latitude")){
+                    var lugarUrl = "/lugar/" + doc.data._id;
+                    $scope.contactFormUrl = "";
+                    $location.path("/");
+                }
+                else
+            {
+                 console.log(data);
+                 $scope.errorMessage  =data.res;
+            }
             });
         }
     })

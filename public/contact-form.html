@@ -16,7 +16,18 @@
       <input id="nombre" class="form-control" type="text" ng-model="lugar.nombre" required>
     </p>
    
-      
+     <p>
+      <label>Latitud</label> 
+      <input id="latitude" class="form-control" type="number" ng-model="data.latitude"  required>
+    <!--{{data.latitude}}-->
+    </p>
+     <p>
+      <label>Longitud</label> 
+      <input id="longitud" class="form-control" type="number" ng-model="data.longitude" required>
+      <!--{{data.longitude}}-->
+    </p>
+     
+   
     <p>
       <label>Palabras claves</label> 
       <input id="palabrasClaves" class="form-control" type="text" ng-model="lugar.palabrasClaves" required>
@@ -26,6 +37,7 @@
       <textarea id="descripcion" rows="3" type="text" class="form-control" ng-model="lugar.descripcion" ></textarea>
     </p>
     <p>
+      <div  ng-if="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
       <button style="margin-top:20px" class="btn btn-default" ng-click="saveLugar(lugar)">Guardar</button>
       <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Volver</button>
     </p>
