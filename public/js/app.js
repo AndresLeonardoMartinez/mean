@@ -39,7 +39,12 @@ var lugares = angular.module("lugaresApp", ['ngRoute', 'moduloMapa'])
                 controller: "EditLugarController",
                 controllerAs: 'ver'
             })
-
+            .when('/readme', {
+                templateUrl: "readme.html"
+            })
+            .when('/integrantes', {
+                templateUrl: "integrantes.html"
+            })
         // .otherwise({
         //     redirectTo: "/"
         // })

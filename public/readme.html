@@ -1,0 +1,72 @@
+<center><h1>Ingeniería de Aplicaciones Web - Proyecto 3 - MEAN Stack</h1> </center>
+
+<p class="parrafo">La idea propuesta en este proyecto era la de realizar una mapoteca virtual de algún tema a 
+elección, mostrando lugares en un mapa e información relacionada a los mismos.
+</p>
+<p class="parrafo">
+Se decidió realizar una mapoteca virtual sobre plazas y espacios verdes de la ciudad.
+</p>
+<p class="parrafo">
+En la pantalla principal de la página se podrá observar una tabla con los espacios verdes 
+registrados: su nombre, sus coordenadas, una pequeña descripción y un conjunto de 
+palabras claves asociadas. La tabla inicialmente se mostrará ordenada alfabéticamente de 
+arriba hacia abajo teniendo en cuenta los nombres de los lugares. El usuario podrá 
+ordenar los lugares teniendo en cuenta cualquiera de los campos (excepto el de las 
+descripciones). En la parte superior se hallará un buscador que filtra por palabras clave 
+(contenidas o enteras).  
+</p>
+<p class="parrafo">
+El usuario podrá hacer click en cualquiera de los lugares registrados, y al hacerlo se 
+cargará un mapa con un marcador indicando la ubicación del lugar en el mismo, y 
+también serán listadas sus características, junto con los comentarios que el lugar haya 
+recibido. Al hacer click sobre el marcador, aparecerá el nombre y la descripción del 
+lugar. La intención era que también se cargara una dirección aproximada del lugar, pero 
+por cuestiones de tiempo no se llegó a implementar.
+</p>
+<p class="parrafo">
+El usuario también podrá puntuar el lugar y hacer un comentario del mismo en la sección 
+correspondiente. Al escribir el comentario se irá mostrando de manera dinámica la vista 
+previa del mismo. No es necesario tener ningún tipo de cuenta para comentar. Los 
+comentarios se listarán desde los más nuevos hacia los más antiguos.
+</p>
+<p class="parrafo">
+Volviendo a la vista principal, en la misma además se podrá ver un botón "ver todos" el 
+cual da la posibilidad de ver en el mapa todos los marcadores corresponientes  a los  
+espacios verdes registrados hasta el momento.
+</p>
+<p class="parrafo">
+Al hacer click en cualquiera de ellos se desplegarán las características anteriormente 
+descriptas, y también se podrán hacer comentarios del mismo.
+</p>
+<p class="parrafo">
+Era necesario implementar el rol del administrador, el cual será el encargado de agregar, 
+modificar y eliminar espacios verdes. Para ello, desde la vista principal, se permitirá, 
+mediante un botón llamado "admin", dirigirse a otra vista a través de la cual se podrá 
+realizar el inicio de sesión. (Nombre de usuario: admin, Contraseña: admin).
+</p>
+<p class="parrafo">
+El administrador podrá cambiar cualquier característica de un determinado lugar excepto 
+sus comentarios.
+</p>
+<p class="parrafo">
+Rest:
+</p>
+<p class="parrafo">
+Se provee un endpoint /lugares el cual provee algunas operaciones públicas y otras 
+privadas (se necesita token). <br>
+
+Operaciones públicas: <br>
+GET /lugares : retorna la lista de espacios verdes <br>
+GET /lugares/:id : retorna un espacio verde específico <br>
+PUT  /lugares/:id : modifica un espacio verde específico <br>
+Operaciones privadas: <br>
+DELETE /lugares/:id : elimina un espacio verde específico <br>
+POST /lugares/:id agrega un espacio verde específico <br>
+En estas dos últimas operaciones el usuario debe agregar un encabezado "x-access-token" 
+con el token que le fue asignado cuando logró la autenticación como administrador.
+</p>
+<p class="parrafo">
+Se provee un endpoint /api el cual provee las operaciones:<br>
+* POST /authenticate: recibiendo un json conteniendo un name y un password retorna 
+un token en caso de validar.
+</p>
