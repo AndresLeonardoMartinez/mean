@@ -1,25 +1,118 @@
-
 <div class="row" ng-hide="data._id">
   <div class="col-md-6">
-      <h2>Crear una nueva librería</h2>
+    <h2>Espacios verdes registrados</h2>
   </div>
 </div>
-<div class="container">
-  <div ng-controller="mostrarLugares">
-    <ui-gmap-google-map 
-        center='map.center' 
-        zoom='map.zoom'
-       options="map.options">
-    
-      <ui-gmap-markers models="markers"
-          coords="'coords'" 
-          click="'onClick'"
-          options="'options'" 
-          events="'events'" 
-          idkey="'_id'">
+<div class="container" ng-controller="mostrarLugares as reviewCtrl">
+  <div>
+    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="map.options">
+
+      <ui-gmap-markers models="markers" coords="'coords'" click="'onClick'" options="'options'" events="'events'" idkey="'_id'">
         <ui-gmap-windows>
-           <div ng-non-bindable>{{nombre}}<br>{{descripcion}}</div>
-        </ui-gmap-windows>        
+          <div ng-non-bindable>{{nombre}}<br>{{descripcion}}</div>
+        </ui-gmap-windows>
       </ui-gmap-markers>
-     </ui-gmap-google-map>      
+    </ui-gmap-google-map>
+  </div>
+  <div class="col-md-2 col-xs-0"> 
+  </div>
+  <div class="redondeado col-md-8 col-xs-12" ng-show="activo">
+    <div class="redondeado " id="inicio">
+      <p>
+        <h2>Espacio verde</h2>
+        <label>Nombre </label>
+
+        <section id="nombre" type="text">
+
+          <h3> {{nombre}}</h3>
+
+        </section>
+
+      </p>
+      </p>
+
+      <p>
+        <label>Palabras Claves</label>
+        <section id="palabrasClaves" type="text" ng-model="lugar.palabrasClaves">
+          <h4>{{palabrasClaves}}</h4>
+        </section>
+      </p>
+      <p>
+        <label>Descripción</label>
+        <section id="descripcion" rows="3" type="text" ng-model="lugar.descripcion">
+          <h4>{{descripcion}}</h4>
+        </section>
+      </p>
     </div>
+    <div class="redondeado ">
+
+      <p>
+        <h2>Dejá tu comentario u opinión sobre este lugar!</h2>
+        <!--<div class="fb-comments" data-href="http://127.0.0.1:8080/#/ver/" data-numposts="5"></div>-->
+
+        <h5 class="pull-right">vista previa</h5>
+
+        <section ng-show="activo">
+          <form name="reviewForm" ng-submit="reviewForm.$valid && reviewCtrl.addReview(lugar)">
+
+
+            <blockquote class="comentarios ">
+              <cite> {{reviewCtrl.comentario.author}} <b>dijo:</b></cite>
+              <p>
+                <div class="grad">
+                  <label>    {{reviewCtrl.comentario.body}}</label>
+                  <br>
+                  <p> Puntuación - {{reviewCtrl.comentario.stars}} estrellas </p>
+                </div>
+
+            </blockquote>
+            <p>
+              <label>Tu puntuación:</label>
+              <select class="form-control" ng-model="reviewCtrl.comentario.stars" required>
+                <option value="1">1 Estrella</option>
+                <option value="2">2 Estrellas</option>
+                <option value="3">3 Estrellas</option>
+                <option value="4">4 Estrellas</option>
+                <option value="5">5 Estrellas</option>
+            </select>
+            </p>
+            <p>
+              <label>Tu comentario:</label>
+              <p>
+                <textarea class="form-control" ng-model="reviewCtrl.comentario.body" required></textarea>
+              </p>
+            </p>
+            <p>
+              <label> Tu nombre:</label>
+              <input class="form-control" ng-model="reviewCtrl.comentario.author" type="text" required />
+            </p>
+
+            <input type="submit" class="btn btn-success " value="Enviar" />
+          </form>
+        </section>
+
+        </p>
+    </div>
+    <div id="comentario" class="redondeado" ng-show="comentarios.length">
+
+      <p>
+        <h2>Comentarios</h2>
+        <blockquote class="comentarios " ng-repeat="comentario in comentarios  |  orderBy:'-' ">
+          <cite> {{comentario.author}} <b>dijo:</b></cite>
+          <p>
+            <div class="grad">
+              <label>    {{comentario.body}}</label>
+              <br>
+              <p> Puntuación - {{comentario.stars}} estrellas </p>
+            </div>
+
+        </blockquote>
+        </p>
+    </div>
+    <p>
+      <button style="margin:20px" class="btn btn-default pull-right" ng-click="reviewCtrl.back()">Volver</button>
+    </p>
+
+  </div>
+  <div class="col-md-2 col-xs-0"></div>
+</div >

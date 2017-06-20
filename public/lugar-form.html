@@ -1,7 +1,7 @@
 
 <div class="row" ng-hide="lugar._id">
   <div class="col-md-6">
-      <h2>Crear una nueva librería</h2>
+      <h2>Registrar un nuevo espacio verde</h2>
   </div>
 </div>
 <div class="container">
@@ -10,6 +10,8 @@
         <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
     </ui-gmap-google-map>
  </div>
+ <div class="col-md-2 col-xs-0"></div>
+  <div class="redondeado col-md-8 col-xs-12" >
   <div id="formulario">
     <form name="crearLugar">
     <p>
@@ -32,14 +34,19 @@
     <p>
       <label>Palabras claves</label> 
       <input id="palabrasClaves" class="form-control" type="text" ng-model="lugar.palabrasClaves" required>
+
+      
+
+       
+
     </p>
     <p>
-      <label>Descripcion</label> 
+      <label>Descripción</label> 
       <textarea id="descripcion" rows="3" type="text" class="form-control" ng-model="lugar.descripcion" ></textarea>
     </p>
     <p>
       <div  ng-if="errorMessage" class="alert alert-danger">{{errorMessage}}</div>
-      <input type="submit" value="Guardar" class="btn btn-default" ng-click="crearLugar.$valid && saveLugar(lugar)" />
+      <input type="submit" value="Guardar" class="btn btn-success" ng-click="crearLugar.$valid && saveLugar(lugar)" />
       <!--<div>
       {{crearLugar.$valid}}
       </div>-->
@@ -47,6 +54,7 @@
       <button class="btn btn-default" ng-click="back()">Volver</button>
     </p>
         </form>
-
   </div>
+  </div>
+    <div class="col-md-2 col-xs-0"></div>
 </div>

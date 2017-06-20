@@ -1,7 +1,6 @@
-<link rel="shortcut icon" href="">
-<div class="row" ng-hide="lugar._id">
-  <div class="col-md-6">
-      <h2>Editar una Plaza o Espacio Verde existente.</h2>
+<div class="row" >
+  <div >
+      <h2>Editar una Plaza o Espacio Verde existente</h2>
   </div>
 </div>
 <div class="container">
@@ -27,9 +26,9 @@
       <textarea id="descripcion" rows="3" type="text" class="form-control" ng-model="lugar.descripcion" ></textarea>
     </p>
     <p>
-    <a href="#/"><button style="margin-top:20px" class="btn btn-default" ng-click="deleteLugar(lugar._id)">Eliminar</button></a>
+    <a href="#/"><button style="margin-top:20px;background-color: #AA0110" class="btn btn-warning" ng-click="deleteLugar(lugar._id)">Eliminar</button></a>
       <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Volver</button>
-      <button style="margin-top:20px" class="btn btn-default" ng-click="saveLugar(lugar)">Guardar</button>
+      <button style="margin-top:20px" class="btn btn-success" ng-click="saveLugar(lugar)">Guardar</button>
     </p>
   </div>
 </div>

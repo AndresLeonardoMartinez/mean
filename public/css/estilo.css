@@ -1,7 +1,23 @@
   body {
-        min-height: 2000px;
+        background-image: url("../fondo.jpg");
+         background-repeat: no-repeat;
+         background-size: cover;
+         /*display: flex;*/
+         /*min-height: 100vh;*/
+         height: 100%;
         /*padding-top: 70px;*/
       }
+.footer {
+  position:fixed ;
+  bottom: 0;
+  margin-top: 10px;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #3e3f3a;
+  color:whitesmoke;
+  text-align: center;
+}
 .angular-google-map-container {
      height: 400px; 
      }
@@ -14,7 +30,27 @@
 }
 
 
-
+.redondeado{
+  border: 2px solid white;
+  color:black;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 5px;
+}
+.comentarios{
+ 
+  padding: 5px;
+  margin: 10px;
+}
+.grad {
+  padding: 10px;
+  border-radius: 10px;
+  background: #93c54b; /* For browsers that do not support gradients */
+  background: -webkit-linear-gradient(left, #93c54b , whitesmoke); /* For Safari 5.1 to 6.0 */
+  background: -o-linear-gradient(right, #93c54b, whitesmoke); /* For Opera 11.1 to 12.0 */
+  background: -moz-linear-gradient(right,#93c54b, whitesmoke); /* For Firefox 3.6 to 15 */
+  background: linear-gradient(to right, #93c54b , whitesmoke); /* Standard syntax */
+}
 mark{
   background-color: lightblue;
   height: 500px;
@@ -29,4 +65,39 @@ section{
   padding-right: 10px;
   
  
+}
+table{
+  background-color: #505050;
+  color: whitesmoke;
+}
+
+tr {
+   cursor: pointer; 
+}
+
+tr:hover {
+   background-color: grey;
+   color: blanchedalmond; 
+}
+
+.ng-invalid.ng-dirty {
+border-color: red;
+}
+
+.ng-valid.ng-dirty {
+border-color: green;
+}
+
+label{
+  font-size: 17px;
+}
+
+.btn-warning{
+  background-color: #f0ad4e;
+}
+.barraBuscadora{
+  margin-top: 20px;
+}
+.propio{
+  margin-bottom: 60px;
 }

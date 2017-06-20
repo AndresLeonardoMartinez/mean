@@ -1,39 +1,37 @@
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
-<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-
-
 
 
 <div class = "row">
-  <div class="col-md-6">
+  <div class="col-md-5">
     <h2>
-      Lugares
+      Espacios Verdes
     </h2>
   </div>
   <div class="col-md-3">
   </div>
   
-  <div class="col-md-2" ng-controller="navegacion as nv" >
+  <div class="col-md-4" ng-controller="navegacion as nv" >
     <ul class="nav navbar-nav navbar-right">
-      <li ng-hide="nv.isLoggedIn"><a href="#/login">Sign in</a></li>
-      <li ng-show="nv.isLoggedIn"><a href ng-click="LogOut()">logout</a> 
+      <li ng-hide="nv.isLoggedIn"><a class="btn btn-warning" href="#/login">Admin</a></li>
+      <li ><a class="btn btn-success" href="#/lugar/todos">Ver todos</a></li>
+
+    
       <li ng-show="nv.isLoggedIn"><a class="btn btn-default" href="#/new/lugar">Nuevo</a></li>
+        <li ng-show="nv.isLoggedIn"><a ng-click="LogOut()" class="btn btn-warning">logout</a> 
 
     </ul>
   </div>
   
-  <div class="col-md-1">
-  </div>
+  
 </div>
 <div class="container"  ng-controller="mainController">
 
  
 
- <form>
+ <form class="barraBuscadora">
     <div class="form-group">
       <div class="input-group">
         <div class="input-group-addon"><i class="fa fa-search"></i></div>
-        <input type="text" class="form-control" placeholder="Buscá tu librería" ng-model="buscaLugar">
+        <input type="text" class="form-control" placeholder="Buscar por palabra clave" ng-model="buscaLugar.palabrasClaves">
       </div>      
     </div>
   </form>

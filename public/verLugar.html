@@ -4,35 +4,29 @@
       <h2>Ver Plaza o Espacio Verde seleccionado.</h2>
   </div>
 </div>
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.9";
-  fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
+<!--<div id="fb-root"></div>//FACEBOOK --> 
 <div class="container">
   <div id="map_canvas" ng-controller="editCtrl">
       <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
         <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
     </ui-gmap-google-map>
- </div>
-  <div>
+  <div class="col-md-2 col-xs-0"></div>
+  <div class="redondeado col-md-8 col-xs-12" >
+   <div class="redondeado " >
     <p>
+      <h2>Espacio verde</h2>
       <label>Nombre </label>
-      <p> 
+      
       <section   id="nombre"   type="text" ng-model="lugar.nombre"  >
   
-        {{lugar.nombre}}
+       <h3> {{lugar.nombre}}</h3>
     
       </section>
     
     </p>
     </p>
     
-     <p>
+     <!--<p>
       <label>Latitud</label> 
       <section id="latitude"   type="number" ng-model="data.latitude">
           {{lugar.latitude}}
@@ -43,39 +37,42 @@
       <section id="longitud"   type="number" ng-model="data.longitude">
           {{lugar.longitude}}
       </section>
-    </p>
+    </p>-->
     <p>
       <label>Palabras Claves</label> 
       <section id="palabrasClaves"   type="text" ng-model="lugar.palabrasClaves">
-          {{lugar.palabrasClaves}}
+         <h4> {{lugar.palabrasClaves}}</h4>
       </section>
     </p>
     <p>
       <label>Descripción</label> 
       <section id="descripcion" rows="3" type="text" ng-model="lugar.descripcion" >
-          {{lugar.descripcion}}
+         <h4> {{lugar.descripcion}}</h4>
       </section>
     </p>
 
-    <br>
-    <br>
-    <br>
+ </div>
+  <div class="redondeado " >
 
     <p>
-        <label>Dejá tu comentario u opinión sobre este lugar!</label>
+        <h2>Dejá tu comentario u opinión sobre este lugar!</h2>
         <!--<div class="fb-comments" data-href="http://127.0.0.1:8080/#/ver/" data-numposts="5"></div>-->
-        
-</div>
+  <h5 class="pull-right">vista previa</h5>      
   <section>      
-      <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" >
-            <blockquote>
-               <b> {{reviewCtrl.comentario.stars}} estrellas</b>
-                {{reviewCtrl.comentario.body}}
-                <cite>por: {{reviewCtrl.comentario.author}}</cite>
-            </blockquote>
+      <form name="reviewForm" ng-controller="ReviewController as reviewCtrl" ng-submit="reviewForm.$valid && reviewCtrl.addReview(lugar)">
+               <blockquote class="comentarios ">
+            <cite> {{reviewCtrl.comentario.author}} <b>dijo:</b></cite>
+            <p>
+              <div class="grad">
+                    <label>    {{reviewCtrl.comentario.body}}</label>
+                    <br> <p> Puntuación - {{reviewCtrl.comentario.stars}} estrellas </p>
+              </div>
+        
+          </blockquote>
+            
            <p> 
                <label>Tu puntuación:</label>
-               <select ng-model="reviewCtrl.comentario.stars" required>
+               <select class="form-control" ng-model="reviewCtrl.comentario.stars" required>
                 <option value="1">1 Estrella</option>
                 <option value="2">2 Estrellas</option>
                 <option value="3">3 Estrellas</option>
@@ -86,43 +83,41 @@
             <p>
                 <label>Tu comentario:</label>
                 <p>
-                    <textarea ng-model="reviewCtrl.comentario.body" required></textarea> 
+                    <textarea class="form-control" ng-model="reviewCtrl.comentario.body" required></textarea> 
                 </p>
             </p>
             <p>
             <label>Tu nombre:</label>
-            <input ng-model="reviewCtrl.comentario.author" type="text" required />
+            <input class="form-control" ng-model="reviewCtrl.comentario.author" type="text" required />
             </p>
-            <div> reviewForm is {{reviewForm.$valid}} </div>
-            <input type="submit" value="Enviar" ng-submit="reviewForm.$valid && reviewCtrl.addReview(lugar)"/>
+            <input type="submit" class="btn btn-success " value="Enviar" />
         </form>
   </section>
         
     </p>
 
-    <br>
-    <br>
-    <br>
-
-    <p>
-      <label>Comentarios</label> 
-
-    <blockquote ng-repeat="comentario in lugar.comentarios">
-        <b>estrellas {{comentario.stars}}</b>
-        {{comentario.body}}
-        <cite>por: {{comentario.author}}</cite>
-    </blockquote>
-
-      
-    </p>
-
     
-
-
-    <p>
-
-      <button style="margin-top:20px" class="btn btn-default" ng-click="back()">Volver</button>
-   
-    </p>
   </div>
-</div>
+ <div id="comentario" class="redondeado " ng-show="lugar.comentarios.length">
+    <p>
+      <h2>Comentarios</h2> 
+    </p>
+    
+  <blockquote class="comentarios " ng-repeat="comentario in lugar.comentarios  |  orderBy:'-'">
+         <cite> {{comentario.author}} <b>dijo:</b></cite>
+         <p>
+           <div class="grad">
+                 <label>    {{comentario.body}}</label>
+                <br> <p> Puntuación - {{comentario.stars}} estrellas </p>
+           </div>
+        
+   </blockquote>
+    </p>
+    </div>
+    <p>
+      <button style="margin:20px" class="btn btn-default pull-right" ng-click="back()">Volver</button>
+     </p>
+
+ </div>
+  <div class="col-md-2 col-xs-0"></div>
+  </div>

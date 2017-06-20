@@ -43,25 +43,25 @@ function handleError(res, reason, message, code) {
 
 
 
-// app.get('/setup', function(req, res) {
+app.get('/setup', function(req, res) {
 
-// 	// create a sample user
-// 	var password = 'admin'
-// 	bcrypt.hash(password, saltRounds, function(err, hash) {
-//   		// Store hash in your password DB.
-// 		var admin = new User({ 
-// 			name: 'admin', 
-// 			password: hash,
-// 			admin: true 
-// 		});
-// 		admin.save(function(err) {
-// 			if (err) throw err;
+	// create a sample user
+	var password = 'admin'
+	bcrypt.hash(password, saltRounds, function(err, hash) {
+  		// Store hash in your password DB.
+		var admin = new User({ 
+			name: 'administrador', 
+			password: hash,
+			admin: true 
+		});
+		admin.save(function(err) {
+			if (err) throw err;
 
-// 			console.log('User saved successfully');
-// 			res.json({ success: true });
-// 		});
-// 	});
-// });
+			console.log('User saved successfully');
+			res.json({ success: true });
+		});
+	});
+});
  
 
 app.use('/api',require('./api'));
