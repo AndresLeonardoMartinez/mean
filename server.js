@@ -50,7 +50,7 @@ app.get('/setup', function(req, res) {
 	bcrypt.hash(password, saltRounds, function(err, hash) {
   		// Store hash in your password DB.
 		var admin = new User({ 
-			name: 'administrador', 
+			name: 'admin', 
 			password: hash,
 			admin: true 
 		});
